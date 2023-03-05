@@ -9,19 +9,25 @@ class GreetingUser extends StatefulWidget {
 }
 
 class _GreetingUserState extends State<GreetingUser> {
+  double _height = 0;
+  double _weight = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
       child: SizedBox(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             const Text('건강 정보 입력',
                 style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    fontSize: 36,
+                    fontSize: 28,
                     fontFamily: 'Retrosans')),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 Padding(
                   padding: EdgeInsets.all(8.0),
@@ -34,41 +40,66 @@ class _GreetingUserState extends State<GreetingUser> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(0.0),
               child: Row(
-                children: const [
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   SizedBox(
                     width: 100,
-                    child: TextField(
-                      decoration: InputDecoration(labelText: "키"),
-                      textAlign: TextAlign.center,
+                    child: TextFormField(
+                      autovalidateMode: AutovalidateMode.always,
+                      onSaved: (value) {
+                        setState(() {
+                          _height = value as double;
+                        });
+                      },
+                      decoration: const InputDecoration(labelText: "키"),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return '수치를 입력하세요..';
+                        }
+                        return null;
+                      },
                     ),
                   ),
-                  Text("cm")
+                  const Text("cm")
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(0.0),
               child: Row(
-                children: const [
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   SizedBox(
                     width: 100,
-                    child: TextField(
-                      decoration: InputDecoration(labelText: "몸무게"),
-                      textAlign: TextAlign.center,
+                    child: TextFormField(
+                      autovalidateMode: AutovalidateMode.always,
+                      onSaved: (value) {
+                        setState(() {
+                          _weight = value as double;
+                        });
+                      },
+                      decoration: const InputDecoration(labelText: "몸무게"),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return '수치를 입력하세요..';
+                        }
+
+                        return null;
+                      },
                     ),
                   ),
-                  Text("kg")
+                  const Text("kg")
                 ],
               ),
             ),
             ElevatedButton(
-                onPressed: () => null,
+                onPressed: () => {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                ),
-                child: const Text("입장"))
+                    backgroundColor: Colors.black,
+                    minimumSize: const Size(200, 50)),
+                child: const Text("확인")),
           ],
         ),
       ),
