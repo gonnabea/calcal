@@ -1,3 +1,4 @@
+import 'package:calcal/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -95,7 +96,12 @@ class _GreetingUserState extends State<GreetingUser> {
               ),
             ),
             ElevatedButton(
-                onPressed: () => {},
+                onPressed: () => {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MainPage()))
+                    },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     minimumSize: const Size(200, 50)),
